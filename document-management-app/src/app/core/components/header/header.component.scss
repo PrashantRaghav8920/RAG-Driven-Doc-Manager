@@ -1,0 +1,103 @@
+// /* filepath: /document-management-app/src/app/core/header/header.component.scss */
+.responsive-toolbar {
+  padding: 0 16px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+//   nav a {
+//     color: white;
+//     text-decoration: none;
+//   }
+
+mat-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  a, button {
+    text-decoration: none;
+    color: white;
+  }
+}
+
+.mat-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.app-title {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  gap: 8px;
+  
+  &:hover {
+    opacity: 0.8;
+  }
+
+  .menu-icon {
+    margin-right: 8px;
+  }
+}
+
+// Desktop Navigation
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+// Mobile Menu Button
+.mobile-menu-button {
+  display: none;
+}
+
+// Responsive Breakpoints
+@media screen and (max-width: 768px) {
+  .desktop-nav {
+    display: none;
+  }
+
+  .mobile-menu-button {
+    display: block;
+  }
+
+  .title-text {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .title-text {
+    display: none;
+  }
+
+  .app-title .menu-icon {
+    margin-right: 0;
+  }
+}
+
+// Menu Item Styles
+mat-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+// Active Route Styles
+a.mat-button.active {
+  background-color: rgba(255, 255, 255, 0.1);
+}

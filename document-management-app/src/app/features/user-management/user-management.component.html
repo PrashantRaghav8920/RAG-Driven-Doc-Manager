@@ -1,0 +1,27 @@
+<div class="user-management-container">
+  <div class="header">
+    <h2>User Management</h2>
+    <button mat-raised-button color="primary" (click)="selectedUser.set(null)">
+      <mat-icon>add</mat-icon> Add User
+    </button>
+  </div>
+
+  <ng-container *ngIf="selectedUser() === null; else userDetail">
+    <app-user-list
+      [users]="userList()"
+      [loading]="(loading$ | async) ?? false"
+      [totalUsers]="totalUsers()"
+      [pageSize]="pageSize()"
+      (onDelete)="deleteUser($event)"
+      (onPageChange)="onPageChange($event)">
+    </app-user-list>
+  </ng-container>
+
+  <ng-template #userDetail>
+    <app-user-detail
+      [user]="selectedUser()"
+      (onSave)="saveUser($event)"
+      (onCancel)="selectedUser.set(null)">
+    </app-user-detail>
+  </ng-template>
+</div>

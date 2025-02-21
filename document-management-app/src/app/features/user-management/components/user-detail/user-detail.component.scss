@@ -1,0 +1,36 @@
+.user-detail-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 24px;
+
+  mat-card {
+    mat-card-header {
+      margin-bottom: 24px;
+
+      mat-card-title {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 500;
+      }
+    }
+
+    mat-card-content {
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        mat-form-field {
+          width: 100%;
+        }
+
+        .button-row {
+          display: flex;
+          justify-content: flex-end;
+          gap: 8px;
+          margin-top: 16px;
+        }
+      }
+    }
+  }
+} 

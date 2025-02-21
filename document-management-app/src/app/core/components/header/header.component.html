@@ -1,0 +1,99 @@
+<!-- filepath: /document-management-app/src/app/core/components/header/header.component.html -->
+<mat-toolbar color="primary" class="responsive-toolbar">
+  <!-- App Title -->
+  <span class="app-title" (click)="onHomeClick()">
+    <mat-icon class="menu-icon">description</mat-icon>
+    <span class="title-text">Document Management</span>
+  </span>
+  
+  <span class="spacer"></span>
+  
+  <!-- Mobile Menu Button -->
+  <button mat-icon-button class="mobile-menu-button" [matMenuTriggerFor]="mobileMenu">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <!-- Desktop Navigation -->
+  <nav class="desktop-nav">
+    <!-- Guest Navigation -->
+    <ng-container *ngIf="!(isAuthenticated$ | async)">
+      <a mat-button routerLink="/auth/login">Login</a>
+      <a mat-button routerLink="/auth/signup">Sign Up</a>
+    </ng-container>
+
+    <!-- Authenticated User Navigation -->
+    <ng-container *ngIf="isAuthenticated$ | async">
+      <a mat-button routerLink="/dashboard">Dashboard</a>
+      <ng-container *ngIf="(currentUser$ | async)?.role === 'ADMIN'">
+        <a mat-button routerLink="/user-management">User Management</a>
+        <a mat-button routerLink="/ingestion-management">Ingestion</a>
+      </ng-container>
+      <a mat-button routerLink="/document-management">Documents</a>
+      <a mat-button routerLink="/qa">Q&A</a>
+      <button mat-button [matMenuTriggerFor]="userMenu">
+        <mat-icon>account_circle</mat-icon>
+        {{ (currentUser$ | async)?.username }}
+      </button>
+    </ng-container>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <mat-menu #mobileMenu="matMenu">
+    <ng-container *ngIf="!(isAuthenticated$ | async)">
+      <a mat-menu-item routerLink="/auth/login">
+        <mat-icon>login</mat-icon>
+        <span>Login</span>
+      </a>
+      <a mat-menu-item routerLink="/auth/signup">
+        <mat-icon>person_add</mat-icon>
+        <span>Sign Up</span>
+      </a>
+    </ng-container>
+
+    <ng-container *ngIf="isAuthenticated$ | async">
+      <a mat-menu-item routerLink="/dashboard">
+        <mat-icon>dashboard</mat-icon>
+        <span>Dashboard</span>
+      </a>
+      <ng-container *ngIf="(currentUser$ | async)?.role === 'ADMIN'">
+        <a mat-menu-item routerLink="/user-management">
+          <mat-icon>people</mat-icon>
+          <span>User Management</span>
+        </a>
+        <a mat-menu-item routerLink="/ingestion-management">
+          <mat-icon>upload_file</mat-icon>
+          <span>Ingestion</span>
+        </a>
+      </ng-container>
+      <a mat-menu-item routerLink="/document-management">
+        <mat-icon>folder</mat-icon>
+        <span>Documents</span>
+      </a>
+      <a mat-menu-item routerLink="/qa">
+        <mat-icon>question_answer</mat-icon>
+        <span>Q&A</span>
+      </a>
+      <mat-divider></mat-divider>
+      <a mat-menu-item routerLink="/profile">
+        <mat-icon>person</mat-icon>
+        <span>Profile</span>
+      </a>
+      <button mat-menu-item (click)="onLogout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Logout</span>
+      </button>
+    </ng-container>
+  </mat-menu>
+
+  <!-- User Menu (Desktop) -->
+  <mat-menu #userMenu="matMenu">
+    <a mat-menu-item routerLink="/profile">
+      <mat-icon>person</mat-icon>
+      <span>Profile</span>
+    </a>
+    <button mat-menu-item (click)="onLogout()">
+      <mat-icon>exit_to_app</mat-icon>
+      <span>Logout</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>
